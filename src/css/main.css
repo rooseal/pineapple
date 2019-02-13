@@ -17,6 +17,7 @@
 
 /* 2.1. HUD Title */
 .title {
+  display: flex;
   left: 40px;
   top: 50px;
 }
@@ -42,8 +43,16 @@
 
 /* 2.3. HUD Controls */
 .controls {
-  bottom: 40px;
+  bottom: 35px;
   left: 30px;
+}
+
+.controls > div:not(:last-child) {
+  margin-bottom: 5px;
+}
+
+.controls__image--down {
+  transform: rotate(180deg);
 }
 
 /* 2.4. HUD Page Index */
