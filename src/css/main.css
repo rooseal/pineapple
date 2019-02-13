@@ -17,7 +17,7 @@
 
 /* 2.1. HUD Title */
 .title {
-  top: 40px;
+  top: 50px;
   left: 40px;
 }
 
@@ -39,3 +39,11 @@
   right: 40px;
 }
 
+/* 3. Site Content */
+
+.content {
+  background-color: #ccc;
+  border: 1px solid transparent;
+  box-sizing: border-box;
+  min-height: 100vh;
+}
