@@ -57,8 +57,24 @@
 
 /* 2.4. HUD Page Index */
 .index {
+  align-items: center;
   bottom: 40px;
+  display: flex;
+  flex-direction: column;
   right: 40px;
+}
+
+.index__number {
+  color: #aaa;
+  font-family: Verdana;
+  margin: 10px 0;
+  padding-right: 4px;
+}
+
+.index__number.active {
+  border-right: 4px solid #EBBA07;
+  color: white;
+  font-size: 1.2em;
 }
 
 /* 3. Site Content */
