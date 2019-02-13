@@ -17,8 +17,21 @@
 
 /* 2.1. HUD Title */
 .title {
-  top: 50px;
   left: 40px;
+  top: 50px;
+}
+
+.title__logo {
+  margin-right: 15px;
+  transform: rotate(-17deg);
+}
+
+.title__text {
+  color: white;
+  font-family: verdana;
+  font-size: 2.5em;
+  font-variant: small-caps;
+  line-height: 1.2;
 }
 
 /* 2.2. HUD Menu*/
