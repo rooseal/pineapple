@@ -1,0 +1,41 @@
+/* 1. General */
+
+/* 2. HUD */
+
+.hud {
+  height: 100vh;
+  left: 0;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+}
+
+.hud__element {
+  position: absolute;
+}
+
+/* 2.1. HUD Title */
+.title {
+  top: 40px;
+  left: 40px;
+}
+
+/* 2.2. HUD Menu*/
+.menu {
+  top: 40px;
+  right: 40px;
+}
+
+/* 2.3. HUD Controls */
+.controls {
+  bottom: 40px;
+  left: 30px;
+}
+
+/* 2.4. HUD Page Index */
+.index {
+  bottom: 40px;
+  right: 40px;
+}
+
