@@ -9,10 +9,12 @@
   position: fixed;
   top: 0;
   width: 100vw;
+  pointer-events: none;
 }
 
 .hud__element {
   position: absolute;
+  pointer-events: auto;
 }
 
 /* 2.1. HUD Title */
