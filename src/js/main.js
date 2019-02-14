@@ -101,8 +101,20 @@
     document.getElementById('menuDrawer').style.display = visibility ? 'block' : 'none';
   }
 
-  function handleUpdatePage (index) {
-    console.log('Let\'s go to page ' + index);
+  function handleUpdatePage (index, pages) {
+    console.log('Let\'s go to page ', pages[index]);
+    
+    // Update scroll position
+    window.scrollTo(0, pages[index].offsetTop);
+
+    // Update active page index
+    document.querySelectorAll('.index__number').forEach(function (currentElement, currentIndex) {
+      if (currentIndex === index) {
+        currentElement.className = 'index__number active';
+      } else {
+        currentElement.className = 'index__number';
+      }
+    });
   }
 
 
@@ -130,6 +142,6 @@
     handleMenu(state.menu);
   });
   emitter.addListener('CHANGE_PAGE', function (state) {
-    handleUpdatePage(state.currentPage);
+    handleUpdatePage(state.currentPage, state.pages);
   })
 }());
