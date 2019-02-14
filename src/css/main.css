@@ -5,6 +5,7 @@ body {
 
 h1 {
   font-size: 3em;
+  color: white;
 }
 
 .flex-row {
@@ -147,16 +148,14 @@ h1 {
 }
 
 .content__container {
-  padding: 150px 100px 0 100px;
-  margin: 100px 0;
 }
 
 .content__container.left {
-  padding: 150px 0 0 100px;
+  margin: 250px 0 0 100px;
 }
 
 .content__container.right {
-  padding: 150px 100px 0 0;
+  margin: 250px 100px 0 0;
 }
 
 /* 3.1. Awards */
