@@ -38,6 +38,7 @@ h1 {
   top: 0;
   width: 100vw;
   pointer-events: none;
+  z-index: 5;
 }
 
 .hud__element {
@@ -198,6 +199,7 @@ h1 {
   right: 100%;
   width: 30px;
   height: 60px;
+  z-index: 1;
 }
 
 .awards__item::after {
@@ -210,6 +212,7 @@ h1 {
   width: 30px;
   height: 60px;
   transform: rotateY(180deg);
+  z-index: 1;
 }
 
 .awards__name {
