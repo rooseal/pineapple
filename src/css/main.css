@@ -42,8 +42,46 @@ body {
 
 /* 2.2. HUD Menu*/
 .menu {
-  top: 40px;
   right: 40px;
+  top: 40px;
+}
+
+.menu__container {
+  background-color: white;
+  bottom: 0;
+  padding: 40px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 5;
+}
+
+.menu__top-controls {
+  text-align: right;
+}
+
+.menu__close-btn {
+  background-color: transparent;
+  border: 0;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.menu__navigation {
+  color: #231322;
+  font-size: 2.3em;
+  list-style-type: none;
+  margin-top: 0;
+  padding-left: 0;
+}
+
+.menu__navigation > li {
+  border-bottom: 1px solid #ccc;
+  padding: 0.4em 0 0.3em 0;
+}
+
+.menu__navigation > li:last-child {
+  border-bottom: 0;
 }
 
 /* 2.3. HUD Controls */
