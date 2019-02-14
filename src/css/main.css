@@ -3,6 +3,18 @@ body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+h1 {
+  font-size: 3em;
+}
+
+.flex-row {
+  display: flex;
+}
+
+.flex-item {
+  flex: 1;
+}
+
 /* 2. HUD */
 
 .hud {
@@ -136,7 +148,6 @@ body {
 
 .content__container {
   padding: 150px 100px 0 100px;
-  border: 1px solid purple;
   margin: 100px 0;
 }
 
