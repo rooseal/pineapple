@@ -12,8 +12,20 @@ h1 {
   display: flex;
 }
 
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
 .flex-item {
   flex: 1;
+}
+
+.action-button {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 0.8em 1.5em;
 }
 
 /* 2. HUD */
