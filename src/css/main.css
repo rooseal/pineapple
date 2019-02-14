@@ -159,6 +159,10 @@ h1 {
   /* border: 1px solid firebrick; */
 }
 
+.page:nth-child(odd) {
+  background-color: #efbac9;
+}
+
 .content__container {
 }
 
