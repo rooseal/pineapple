@@ -134,6 +134,7 @@ h1 {
 
 .index__number {
   color: #aaa;
+  cursor: pointer;
   font-family: Verdana;
   margin: 10px 0;
   padding-right: 4px;
