@@ -1,4 +1,26 @@
 (function () {
+  // Define user actions
+  const actions = {
+    openMenu () {
+      return {
+        type: 'OPEN_MENU'
+      }
+    },
+    closeMenu () {
+      return {
+        type: 'CLOSE_MENU'
+      }
+    },
+    goToPage (index) {
+      return {
+        type: 'CHANGE_PAGE',
+        payload: {
+          index: index || 0
+        }
+      }
+    }
+  }
+
   // START - General functions
   function createDispatcher (reducer, store, emitter) {
     return function dispatch (action) {
@@ -15,26 +37,39 @@
       emitter.emitEvent(action.type, [store]); 
     }
   }
+
+  function createIndexMarkup (index, dispatch) {
+    const visibleIndex = index + 1;
+    const indexDiv = document.createElement('div');
+
+    indexDiv.className = index === 0 ? 'index__number active' : 'index__number';
+    indexDiv.textContent = visibleIndex > 9 ? '0' + visibleIndex : '' + visibleIndex;
+    indexDiv.addEventListener('click', function handleClickIndex (event) {
+      dispatch(actions.goToPage(index));
+    });
+
+    return indexDiv;
+  }
+
+  function buildPageIndices (pages, dispatch) {
+    const indexContainer = document.getElementById('pageIndices');
+
+    const fragment = pages.reduce((fragment, currentPage, index) => {
+      fragment.appendChild(createIndexMarkup(index, dispatch));
+      return fragment;
+    }, document.createDocumentFragment());
+
+    indexContainer.innerHTML = '';
+    indexContainer.appendChild(fragment);
+  }
   // END - General functions
 
   // Define site state
   const state = {
-    menu: false
+    menu: false,
+    pages: Array.from(document.querySelectorAll('.page') || []),
+    currentPage: 0,
   };
-
-  // Define user actions
-  const actions = {
-    openMenu () {
-      return {
-        type: 'OPEN_MENU'
-      }
-    },
-    closeMenu () {
-      return {
-        type: 'CLOSE_MENU'
-      }
-    }
-  }
 
   // Define state reducer function
   function reducer (state, action) {
@@ -49,6 +84,11 @@
           ...state,
           menu: false
         }
+      case 'CHANGE_PAGE':
+        return {
+          ...state,
+          currentPage: action.payload.index
+        }
       default:
         return state;
     }
@@ -59,6 +99,10 @@
     // Execute code to show menu
     console.log('Setting menu visibility to ', visibility);
     document.getElementById('menuDrawer').style.display = visibility ? 'block' : 'none';
+  }
+
+  function handleUpdatePage (index) {
+    console.log('Let\'s go to page ' + index);
   }
 
 
@@ -72,6 +116,8 @@
   const emitter = new EventEmitter();
   const dispatch = createDispatcher(reducer, state, emitter);
   
+  buildPageIndices(state.pages, dispatch);
+
   // Bind user interactions to actions
   document.getElementById('menuToggle').addEventListener('click', function () { dispatch(actions.openMenu()) });
   document.getElementById('menuClose').addEventListener('click', function () { dispatch(actions.closeMenu()) });
@@ -83,4 +129,7 @@
   emitter.addListener('CLOSE_MENU', function (state) {
     handleMenu(state.menu);
   });
+  emitter.addListener('CHANGE_PAGE', function (state) {
+    handleUpdatePage(state.currentPage);
+  })
 }());
