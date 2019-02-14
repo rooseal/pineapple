@@ -28,6 +28,11 @@
       return {
         type: 'OPEN_MENU'
       }
+    },
+    closeMenu () {
+      return {
+        type: 'CLOSE_MENU'
+      }
     }
   }
 
@@ -39,6 +44,11 @@
           ...state,
           menu: true
         }
+      case 'CLOSE_MENU':
+        return {
+          ...state,
+          menu: false
+        }
       default:
         return state;
     }
@@ -48,6 +58,7 @@
   function handleMenu(visibility) {
     // Execute code to show menu
     console.log('Setting menu visibility to ', visibility);
+    document.getElementById('menuDrawer').style.display = visibility ? 'block' : 'none';
   }
 
 
@@ -63,9 +74,13 @@
   
   // Bind user interactions to actions
   document.getElementById('menuToggle').addEventListener('click', function () { dispatch(actions.openMenu()) });
+  document.getElementById('menuClose').addEventListener('click', function () { dispatch(actions.closeMenu()) });
 
   // Bind actions to behaviour
   emitter.addListener('OPEN_MENU', function (state) {
+    handleMenu(state.menu);
+  });
+  emitter.addListener('CLOSE_MENU', function (state) {
     handleMenu(state.menu);
   });
 }());
