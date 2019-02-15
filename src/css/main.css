@@ -33,6 +33,28 @@ h1 {
   flex: 1;
 }
 
+.info-box__container {
+
+}
+
+.info-box {
+  padding: 20px;
+  border: 1px solid #ccc;
+  font-size: 0.875em;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.info-box:not(:first-child) {
+  margin-left: 20px;
+}
+
+.info-box__icon {
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+}
+
 /* 2. HUD */
 
 .hud {
