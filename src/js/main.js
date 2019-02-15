@@ -115,6 +115,19 @@
         currentElement.className = 'index__number';
       }
     });
+
+    // Update arrow controls
+    if (index <= 0) {
+      document.getElementById('previousPage').style.display = 'none';
+    } else {
+      document.getElementById('previousPage').style.display = 'block';
+    }
+
+    if (index >= pages.length - 1) {
+      document.getElementById('nextPage').style.display = 'none';
+    } else {
+      document.getElementById('nextPage').style.display = 'block';
+    }
   }
 
 
@@ -133,6 +146,8 @@
   // Bind user interactions to actions
   document.getElementById('menuToggle').addEventListener('click', function () { dispatch(actions.openMenu()) });
   document.getElementById('menuClose').addEventListener('click', function () { dispatch(actions.closeMenu()) });
+  document.getElementById('previousPage').addEventListener('click', function () { dispatch(actions.goToPage(Math.max(state.currentPage - 1, 0))) });
+  document.getElementById('nextPage').addEventListener('click', function () { dispatch(actions.goToPage(Math.min(state.currentPage + 1, state.pages.length - 1))) });
 
   // Bind actions to behaviour
   emitter.addListener('OPEN_MENU', function (state) {
