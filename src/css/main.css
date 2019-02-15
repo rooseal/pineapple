@@ -161,6 +161,9 @@ h1 {
 
 .page {
   height: 100vh;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
   /* border: 1px solid firebrick; */
 }
 
@@ -236,6 +239,14 @@ h1 {
 
 .awards__name {
   padding-bottom: 20px;
+}
+
+#page1 {
+  background-image: url(../assets/page1Background.png);
+}
+
+#page2 {
+  background-image: url(../assets/page2Background.png);
 }
 
 @media only screen and (min-width: 700px) {
