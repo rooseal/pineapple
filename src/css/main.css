@@ -120,6 +120,10 @@ h1 {
   left: 30px;
 }
 
+.controls > div {
+  cursor: pointer;
+}
+
 .controls > div:not(:last-child) {
   margin-bottom: 5px;
 }
