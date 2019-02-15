@@ -188,6 +188,7 @@ h1 {
   width: 100px;
   color: white;
   text-align: center;
+  margin: 0 35px 35px 35px;
 }
 
 .awards__item::before {
