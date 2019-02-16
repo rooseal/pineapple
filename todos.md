@@ -1,11 +1,12 @@
 # Todos
   - Add action behind up / down arrow controls [DONE]
-  - Finish the menu styling
+  - Finish the menu styling [DONE]
   - Add footer html
   - Style footer
   - Make all clickable divs buttons for accessibility
   - Disable scroll and add custom events for scrollwheel interaction
   - Create the initial page state with an action to create the correct initial view
   - Add animation to the changing of pages and menu open / close
+  - Add social media bar in menu
   - Save all the elements in an object for future reference on start
   - Add data attributes for all interactive elements to bind them to actions automaticly eg. data-action="openMenu" 
