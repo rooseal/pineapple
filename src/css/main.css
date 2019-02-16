@@ -33,28 +33,6 @@ h1 {
   flex: 1;
 }
 
-.info-box__container {
-
-}
-
-.info-box {
-  padding: 20px;
-  border: 1px solid #ccc;
-  font-size: 0.875em;
-  margin-bottom: 20px;
-  flex: 1;
-}
-
-.info-box:not(:first-child) {
-  margin-left: 20px;
-}
-
-.info-box__icon {
-  position: relative;
-  display: inline-block;
-  margin-right: 10px;
-}
-
 /* 2. HUD */
 
 .hud {
@@ -135,6 +113,35 @@ h1 {
 
 .menu__navigation > li:last-child {
   border-bottom: 0;
+}
+
+.info-box__container {
+
+}
+
+.info-box {
+  border: 1px solid #ccc;
+  flex: 1;
+  font-size: 0.875em;
+  margin-bottom: 20px;
+  padding: 20px 20px 20px 40px;
+  position: relative;
+}
+
+/* .info-box:not(:first-child) {
+  margin-left: 20px;
+} */
+
+.info-box__icon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /* 2.3. HUD Controls */
