@@ -100,7 +100,7 @@ h1 {
 
 .menu__navigation {
   color: #231322;
-  font-size: 2.3em;
+  font-size: 1.3em;
   list-style-type: none;
   margin-top: 0;
   padding-left: 0;
@@ -290,6 +290,10 @@ h1 {
     text-align: left;
   }
 
+  .menu__navigation {
+    font-size: 1.8em;
+  }
+
   .flex-row.from-medium {
     display: flex;
   }
@@ -317,6 +321,10 @@ h1 {
 @media only screen and (min-width: 1200px) {
   h1 {
     font-size: 3em;
+  }
+
+  .menu__navigation {
+    font-size: 2.3em;
   }
 
   .flex-row.from-large {
