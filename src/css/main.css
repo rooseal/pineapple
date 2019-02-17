@@ -119,10 +119,6 @@ h2 {
   border-bottom: 0;
 }
 
-.info-box__container {
-
-}
-
 .info-box {
   border: 1px solid #ccc;
   flex: 1;
@@ -208,9 +204,6 @@ h2 {
 
 .page:nth-child(odd) {
   background-color: #efbac9;
-}
-
-.content__container {
 }
 
 .content__container.left {
