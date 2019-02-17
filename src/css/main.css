@@ -12,6 +12,10 @@ h1 {
   text-shadow: 1px 0 1px rgba(0, 0, 0, 0.4), 1px 1px 1px rgba(0, 0, 0, 0.4), 0 1px 1px rgba(0, 0, 0, 0.4), 0 0 1px rgba(0, 0, 0, 0.4);
 }
 
+h2 {
+  font-weight: normal;
+}
+
 .flex-row {
   display: flex;
 }
@@ -283,6 +287,81 @@ h1 {
 #page2 {
   background-image: url(../assets/page2Background.png);
 }
+
+/* 3. Footer */
+
+footer {
+  background-color: #1D1614;
+  padding: 50px 50px 0 50px;
+  color: #ccc;
+}
+
+.footer__extended {
+  display: flex;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #333;
+}
+
+.footer__extended > div {
+  flex: 1;
+}
+
+.footer__navigation > ul, .footer__sub-navigation > ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  list-style-type: none;
+  margin: 0;
+  height: 100%;
+  padding-left: 0;
+}
+
+.footer__navigation > ul {
+  font-size: 1.5em;
+}
+
+.footer__navigation > ul > li {
+  padding-bottom: 0.5em;
+}
+
+.footer__sub-navigation, .footer__contact, .footer__navigation {
+  padding-top: 30px;
+}
+
+.footer__main {
+  display: flex;
+  padding: 20px 0;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer__logo {
+  margin-right: 200px;
+}
+
+.footer__links {
+  display: flex;
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+  flex: 1;
+}
+
+.footer__links > li {
+  padding-right: 100px;
+}
+
+.footer__social-media {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-end;
+}
+
+.footer__social-media__container {
+  padding-left: 20px;
+}
+
+/* 4. Responsive Breakpoints */
 
 @media only screen and (min-width: 700px) {
   h1 {
