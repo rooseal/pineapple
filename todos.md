@@ -3,7 +3,7 @@
   - Finish the menu styling [DONE]
   - Add footer html [DONE]
   - Style footer [DONE]
-  - Make all clickable divs buttons for accessibility
+  - Make all clickable divs buttons for accessibility [DONE]
   - Disable scroll and add custom events for scrollwheel interaction
   - Create the initial page state with an action to create the correct initial view
   - Add animation to the changing of pages and menu open / close

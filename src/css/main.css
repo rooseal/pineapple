@@ -158,6 +158,12 @@ h2 {
   margin-bottom: 5px;
 }
 
+.controls__up, .controls__down {
+  border: 0;
+  background-color: transparent;
+  outline: none;
+}
+
 .controls__image--down {
   transform: rotate(180deg);
 }
