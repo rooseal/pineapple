@@ -195,7 +195,7 @@ h2 {
 
 .content {
   background-color: #ccc;
-  border: 1px solid transparent;
+  /* border: 1px solid transparent; */
   box-sizing: border-box;
   min-height: 100vh;
 }
