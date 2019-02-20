@@ -293,6 +293,12 @@ footer {
   background-color: #1D1614;
   padding: 50px 50px 0 50px;
   color: #ccc;
+  position: fixed;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 4;
 }
 
 .footer__extended {
