@@ -152,7 +152,7 @@
   function handleUpdatePage (index, pages) {
     // console.log('Let\'s go to page ', pages[index]);
     
-    let speed = 100;
+    let speed = 20;
     let direction;
 
     let target = pages[index].offsetTop;
@@ -206,13 +206,24 @@
 
   function handleFooter (showFooter) {
     // document.querySelector('footer').style.bottom = showFooter ? '0' : '100%';
-    let speed = 100;
+    let speed = 50;
     let direction;
 
     let element = document.querySelector('footer');
-    let target = showFooter ? element.offsetHeight : 0;
+    let controls = document.getElementById('pageControls');
+    let indices = document.getElementById('pageIndices');
 
-    console.log({ element });
+    let target = showFooter ? element.offsetHeight : 0;
+    let start = Number(element.style.marginTop.replace(/\D/g, ''));
+
+    // Make sure the lower hud elements are hidden when the footer pops up so they don't interfere
+    if (showFooter) {
+      controls.style.display = 'none';
+      indices.style.display = 'none';
+    } else {
+      controls.style.display = 'block';
+      indices.style.display = 'block';
+    }
 
     // Update scroll position
     (function animatedScroll (source) {
@@ -224,7 +235,6 @@
         }
   
         const newPosition = direction === 'down' ? source + speed : source - speed;
-        console.log('Scroll from ' + source + ' ' + direction + ' to ' + newPosition  + ' at ' + speed + ' speed');
   
         if ((direction === 'down' && newPosition >= target) || (direction === 'up' && newPosition <= target)) {
           element.style.marginTop = '-' + target + 'px';
@@ -234,7 +244,7 @@
           animatedScroll(newPosition);
         }
       })
-    })(showFooter ? 0 : element.offsetHeight);
+    })(start);
   }
 
 
