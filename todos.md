@@ -8,6 +8,7 @@
   - Create the initial page state with an action to create the correct initial view
   - Add animation to the changing of pages and menu open / close
   - Add social media bar in menu
+  - Add isScrolling state
   - Make navigation items anchor tags 
   - Save all the elements in an object for future reference on start
   - Add data attributes for all interactive elements to bind them to actions automaticly eg. data-action="openMenu" 
