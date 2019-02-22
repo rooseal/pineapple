@@ -1,6 +1,6 @@
 (function () {
   // Define user actions
-  const actions = {
+  var actions = {
     openMenu () {
       return {
         type: 'OPEN_MENU'
@@ -36,13 +36,22 @@
       return {
         type: 'HIDE_FOOTER'
       }
+    },
+    setScrolling (isScrolling) {
+      return {
+        type: 'SET_SCROLLING',
+        payload: {
+          isScrolling
+        }
+      }
     }
   }
 
   // Define site state
-  let state = {
+  var state = {
     menu: false,
     footer: false,
+    isScrolling: false,
     pages: [],
     currentPage: 0,
   };
@@ -65,8 +74,8 @@
   }
 
   function createIndexMarkup (activeIndex, index, dispatch) {
-    const visibleIndex = index + 1;
-    const indexDiv = document.createElement('div');
+    var visibleIndex = index + 1;
+    var indexDiv = document.createElement('div');
 
     indexDiv.className = index === activeIndex ? 'index__number active' : 'index__number';
     indexDiv.textContent = visibleIndex > 9 ? '0' + visibleIndex : '' + visibleIndex;
@@ -78,9 +87,9 @@
   }
 
   function buildPageIndices (activeIndex, pages, dispatch) {
-    const indexContainer = document.getElementById('pageIndices');
+    var indexContainer = document.getElementById('pageIndices');
 
-    const fragment = pages.reduce((fragment, currentPage, index) => {
+    var fragment = pages.reduce((fragment, currentPage, index) => {
       fragment.appendChild(createIndexMarkup(activeIndex, index, dispatch));
       return fragment;
     }, document.createDocumentFragment());
@@ -90,7 +99,7 @@
   }
 
   function throttleAction (speed) {
-    let state = {
+    var state = {
       action: undefined,
       handle: undefined
     }
@@ -147,6 +156,11 @@
           ...state,
           ...action.payload.initialState
         }
+      case 'SET_SCROLLING':
+        return {
+          ...state,
+          isScrolling: action.payload.isScrolling
+        }
       default:
         return state;
     }
@@ -155,7 +169,7 @@
   // Define functions to update the view
   function handleMenu(visibility) {
     // Execute code to show menu
-    const menuDrawer = document.getElementById('menuDrawer');
+    var menuDrawer = document.getElementById('menuDrawer');
 
     if (visibility) {
       menuDrawer.style.marginRight = '-' + menuDrawer.offsetWidth + 'px';
@@ -180,17 +194,17 @@
     }
   }
 
-  function handleUpdatePage (index, pages) {
-    // console.log('Let\'s go to page ', pages[index]);
+  function handleUpdatePage (index, pages, dispatch) {
+    var speed = 20;
+    var direction;
+
     
-    let speed = 20;
-    let direction;
-
-    let target = pages[index].offsetTop;
-
-    // console.log('TARGET = ' + target);
+    // Set isScrolling state to indicate scroll action is happening
+    dispatch(actions.setScrolling(true));
 
     // Update scroll position
+    var target = pages[index].offsetTop;
+
     (function animatedScroll (source) {
       requestAnimationFrame(function () {
         if (source < target) {
@@ -199,12 +213,13 @@
           direction = 'up';
         }
   
-        const newPosition = direction === 'down' ? source + speed : source - speed;
+        var newPosition = direction === 'down' ? source + speed : source - speed;
         // console.log('Scroll from ' + source + ' ' + direction + ' to ' + newPosition  + ' at ' + speed + ' speed');
   
         if ((direction === 'down' && newPosition >= target) || (direction === 'up' && newPosition <= target)) {
           window.scrollTo(0, target);
-          // console.log('We are there');
+          
+          dispatch(actions.setScrolling(false));
         } else {
           window.scrollTo(0, newPosition);
           animatedScroll(newPosition);
@@ -226,15 +241,15 @@
 
   function handleFooter (showFooter) {
     // document.querySelector('footer').style.bottom = showFooter ? '0' : '100%';
-    let speed = 50;
-    let direction;
+    var speed = 50;
+    var direction;
 
-    let element = document.querySelector('footer');
-    let controls = document.getElementById('pageControls');
-    let indices = document.getElementById('pageIndices');
+    var element = document.querySelector('footer');
+    var controls = document.getElementById('pageControls');
+    var indices = document.getElementById('pageIndices');
 
-    let target = showFooter ? element.offsetHeight : 0;
-    let start = Number(element.style.marginTop.replace(/\D/g, ''));
+    var target = showFooter ? element.offsetHeight : 0;
+    var start = Number(element.style.marginTop.replace(/\D/g, ''));
 
     // Make sure the lower hud elements are hidden when the footer pops up so they don't interfere
     if (showFooter) {
@@ -254,7 +269,7 @@
           direction = 'up';
         }
   
-        const newPosition = direction === 'down' ? source + speed : source - speed;
+        var newPosition = direction === 'down' ? source + speed : source - speed;
   
         if ((direction === 'down' && newPosition >= target) || (direction === 'up' && newPosition <= target)) {
           element.style.marginTop = '-' + target + 'px';
@@ -269,7 +284,7 @@
 
   // This code get's executed when the site loads.
   function initApp ({ dispatch }) {
-    const pages = Array.from(document.querySelectorAll('.page'));
+    var pages = Array.from(document.querySelectorAll('.page'));
 
     console.log({ windowScroll: window.scrollY });
 
@@ -289,8 +304,8 @@
 
   console.log('Houston, we have javascript');
   // Create state dispatcher
-  const emitter = new EventEmitter();
-  const dispatch = createDispatcher(reducer, emitter);
+  var emitter = new EventEmitter();
+  var dispatch = createDispatcher(reducer, emitter);
 
   // Bind user interactions to actions
   document.getElementById('menuToggle').addEventListener('click', function () { dispatch(actions.openMenu()) });
@@ -312,7 +327,7 @@
   });
   
   // Add custom scroll behviour
-  const throttleScroll = throttleAction(1000);
+  var throttleScroll = throttleAction(1000);
   window.addEventListener('wheel', function (event) {
     event.preventDefault();
 
@@ -351,7 +366,7 @@
     handleFooter(state.footer);
   });
   emitter.addListener('CHANGE_PAGE', function (state) {
-    handleUpdatePage(state.currentPage, state.pages);
+    handleUpdatePage(state.currentPage, state.pages, dispatch);
   });
   emitter.addListener('INIT', function (state) {
     console.log({ state });
