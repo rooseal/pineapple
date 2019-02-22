@@ -9,6 +9,6 @@
   - Add animation to the changing of pages and menu open / close [DONE]
   - Add social media bar in menu
   - Add isScrolling state [DONE]
-  - Make navigation items anchor tags 
+  - Make navigation items anchor tags [DONE]
   - Save all the elements in an object for future reference on start
   - Add data attributes for all interactive elements to bind them to actions automaticly eg. data-action="openMenu" 

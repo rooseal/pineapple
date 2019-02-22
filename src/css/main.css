@@ -186,10 +186,22 @@ h2 {
   padding-right: 4px;
 }
 
+.index__number > a {
+  color: #aaa;
+  font-family: Verdana;
+  text-decoration: none;
+}
+
 .index__number.active {
   border-right: 4px solid #EBBA07;
   color: white;
   font-size: 1.2em;
+}
+
+.index__number.active > a {
+  color: white;
+  font-size: 1.2em;
+  text-decoration: none;
 }
 
 /* 3. Site Content */
