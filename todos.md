@@ -5,7 +5,7 @@
   - Style footer [DONE]
   - Make all clickable divs buttons for accessibility [DONE]
   - Disable scroll and add custom events for scrollwheel interaction [DONE]
-  - Create the initial page state with an action to create the correct initial view
+  - Create the initial page state with an action to create the correct initial view [DONE]
   - Add animation to the changing of pages and menu open / close
   - Add social media bar in menu
   - Add isScrolling state

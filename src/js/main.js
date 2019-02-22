@@ -19,6 +19,14 @@
         }
       }
     },
+    init (initialState) {
+      return {
+        type: 'INIT',
+        payload: {
+          initialState
+        }
+      }
+    },
     showFooter () {
       return {
         type: 'SHOW_FOOTER'
@@ -35,7 +43,7 @@
   let state = {
     menu: false,
     footer: false,
-    pages: Array.from(document.querySelectorAll('.page') || []),
+    pages: [],
     currentPage: 0,
   };
 
@@ -56,11 +64,11 @@
     }
   }
 
-  function createIndexMarkup (index, dispatch) {
+  function createIndexMarkup (activeIndex, index, dispatch) {
     const visibleIndex = index + 1;
     const indexDiv = document.createElement('div');
 
-    indexDiv.className = index === 0 ? 'index__number active' : 'index__number';
+    indexDiv.className = index === activeIndex ? 'index__number active' : 'index__number';
     indexDiv.textContent = visibleIndex > 9 ? '0' + visibleIndex : '' + visibleIndex;
     indexDiv.addEventListener('click', function handleClickIndex (event) {
       dispatch(actions.goToPage(index));
@@ -69,11 +77,11 @@
     return indexDiv;
   }
 
-  function buildPageIndices (pages, dispatch) {
+  function buildPageIndices (activeIndex, pages, dispatch) {
     const indexContainer = document.getElementById('pageIndices');
 
     const fragment = pages.reduce((fragment, currentPage, index) => {
-      fragment.appendChild(createIndexMarkup(index, dispatch));
+      fragment.appendChild(createIndexMarkup(activeIndex, index, dispatch));
       return fragment;
     }, document.createDocumentFragment());
 
@@ -101,9 +109,6 @@
 
         state.action();
         state.action = undefined;
-
-        console.log({ handle: state.handle });
-        console.log('Create new timeout')
       }
     }
   }
@@ -137,6 +142,11 @@
           ...state,
           footer: false
         }
+      case 'INIT':
+        return {
+          ...state,
+          ...action.payload.initialState
+        }
       default:
         return state;
     }
@@ -147,6 +157,20 @@
     // Execute code to show menu
     console.log('Setting menu visibility to ', visibility);
     document.getElementById('menuDrawer').style.display = visibility ? 'block' : 'none';
+  }
+
+  function handleUpdateControls (index, pages) {
+    if (index <= 0) {
+      document.getElementById('previousPage').style.display = 'none';
+    } else {
+      document.getElementById('previousPage').style.display = 'block';
+    }
+
+    if (index >= pages.length - 1) {
+      document.getElementById('nextPage').style.display = 'none';
+    } else {
+      document.getElementById('nextPage').style.display = 'block';
+    }
   }
 
   function handleUpdatePage (index, pages) {
@@ -190,18 +214,7 @@
       }
     });
 
-    // Update arrow controls
-    // if (index <= 0) {
-    //   document.getElementById('previousPage').style.display = 'none';
-    // } else {
-    //   document.getElementById('previousPage').style.display = 'block';
-    // }
-
-    // if (index >= pages.length - 1) {
-    //   document.getElementById('nextPage').style.display = 'none';
-    // } else {
-    //   document.getElementById('nextPage').style.display = 'block';
-    // }
+    handleUpdateControls(index, pages);
   }
 
   function handleFooter (showFooter) {
@@ -247,18 +260,30 @@
     })(start);
   }
 
+  // This code get's executed when the site loads.
+  function initApp ({ dispatch }) {
+    const pages = Array.from(document.querySelectorAll('.page'));
+
+    console.log({ windowScroll: window.scrollY });
+
+    // Init the state
+    dispatch(actions.init({
+      pages,
+      currentPage: pages.findIndex(currentPage => {
+        console.log({ offset: currentPage.offsetTop })
+        return currentPage.offsetTop === Math.round(window.scrollY)
+      })
+    }));
+  }
 
   //
   // Run code when window loads
   //
 
   console.log('Houston, we have javascript');
-
   // Create state dispatcher
   const emitter = new EventEmitter();
   const dispatch = createDispatcher(reducer, emitter);
-  
-  buildPageIndices(state.pages, dispatch);
 
   // Bind user interactions to actions
   document.getElementById('menuToggle').addEventListener('click', function () { dispatch(actions.openMenu()) });
@@ -321,4 +346,11 @@
   emitter.addListener('CHANGE_PAGE', function (state) {
     handleUpdatePage(state.currentPage, state.pages);
   });
+  emitter.addListener('INIT', function (state) {
+    console.log({ state });
+    handleUpdateControls(state.currentPage, state.pages);
+    buildPageIndices(state.currentPage, state.pages, dispatch);
+  });
+
+  initApp({ dispatch, emitter });
 }());
