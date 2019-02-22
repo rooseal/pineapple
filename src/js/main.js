@@ -155,8 +155,15 @@
   // Define functions to update the view
   function handleMenu(visibility) {
     // Execute code to show menu
-    console.log('Setting menu visibility to ', visibility);
-    document.getElementById('menuDrawer').style.display = visibility ? 'block' : 'none';
+    const menuDrawer = document.getElementById('menuDrawer');
+
+    if (visibility) {
+      menuDrawer.style.marginRight = '-' + menuDrawer.offsetWidth + 'px';
+      menuDrawer.style.display = 'block';
+      menuDrawer.style.marginRight = 0;
+    } else {
+      menuDrawer.style.marginRight = '-' + menuDrawer.offsetWidth + 'px';
+    }
   }
 
   function handleUpdateControls (index, pages) {

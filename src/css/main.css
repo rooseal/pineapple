@@ -89,6 +89,7 @@ h2 {
   right: 0;
   top: 0;
   z-index: 5;
+  transition: margin-right 0.1s;
 }
 
 .menu__top-controls {
